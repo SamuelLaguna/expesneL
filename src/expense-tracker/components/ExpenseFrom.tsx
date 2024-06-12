@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import categories from "../categories";
+// import { useState } from "react";
+
 
 
 const schema = z.object({
@@ -13,22 +15,30 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const {
-    register,
-    handleSubmit,
-    formState: { errors },
-} = useForm<FormData>({
-    resolver: zodResolver(schema)
-});
+interface ExpenseFormProps{
+  addOnExpense:(data: FormData) => void
+}
 
-const ExpenseForm = () => {
-    const onSubmit = (data: FormData) => {
-        console.log(data);
-    };
+
+const ExpenseForm = ({addOnExpense}:ExpenseFormProps) => {
+  const {
+      register,
+      handleSubmit,
+      formState: { errors },reset
+  } = useForm<FormData>({
+      resolver: zodResolver(schema)
+  });
+
+    // const [list, setList] = useState<FormData[]>([])
+
+    // const onSubmit = (data: FormData) => {
+    //   addOnExpense(data)
+    //   reset();
+    // };
     
     return (
         <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(addOnExpense)}>
         <div className="mb-3">
           <label htmlFor="description" className="form-label">
             Description
@@ -77,9 +87,10 @@ const ExpenseForm = () => {
               <p className="text-danger">{errors.category.message}</p>
             )}
         </div>
-        <button className="btn btn-outline-primary" type="submit">
+        <button  className="btn btn-outline-primary" type="submit">
           Submit
         </button>
+       
       </form>
     </>
   );

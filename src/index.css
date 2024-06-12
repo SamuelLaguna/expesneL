@@ -1,5 +1,10 @@
 body {
-  background-color: rgb(41,40,40);
-  color: rgb(210, 210, 215);
+  /* background-color: rgb(41,40,40); */
+  background-image: url(../src/whitewood.jpeg);
+  /* color: rgb(210, 210, 215); */
 
+}
+
+.tBody{
+  color: yellow;
 }

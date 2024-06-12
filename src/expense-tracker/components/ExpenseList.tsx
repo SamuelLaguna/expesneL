@@ -4,7 +4,9 @@ interface Expense {
     id: number;
     description: string;
     amount: number
-    catagory:string;
+    category:string;
+    
+    
 }
 
 interface ExpenseProps {
@@ -15,26 +17,26 @@ interface ExpenseProps {
 const ExpenseList = ({expenses,onDelete}:ExpenseProps) => {
   return (
    <>
-   <table className="table table-dark table-bordered">
+   <table className="table tBody table-bordered">
   <thead>
     <tr>
       <th scope="col">Description</th>
       <th scope="col">Amount</th>
-      <th scope="col">Catagory</th>
+      <th scope="col">Category</th>
       <th scope="col"></th>
     </tr>
   </thead>
-  <tbody>
+  <tbody className="tBody">
     {expenses.map(expense => <tr key={expense.id}>
         <td>{expense.description}</td>
     <td>{expense.amount}</td>
-    <td>{expense.catagory}</td>
+    <td>{expense.category}</td>
     <td>
         <button className="btn btn-outline-danger" onClick={() => onDelete(expense.id)}>Delete</button>
     </td>
     </tr>)}
   
-  </tbody>
+  </tbody >
   <tfoot>
     <tr>
         <td>Total</td>
