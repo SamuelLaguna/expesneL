@@ -2,8 +2,9 @@ import categories from "../categories";
 interface FilterProps
 {
     onSelectCategory: (category:string) => void;
+    fetchData: () => void;
 }
-const ExpenseFilter = ({onSelectCategory}:FilterProps) => {
+const ExpenseFilter = ({onSelectCategory,fetchData}:FilterProps) => {
   return (
   <>
   <select className="form-select" onChange={(e) => onSelectCategory(e.target.value)}>

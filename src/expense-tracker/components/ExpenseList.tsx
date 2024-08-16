@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../constant";
-import ColorModeSwitch from "./ColorModeSwitch";
+
 import ExpenseForm from "./ExpenseFrom";
 import { Expense } from "../../App";
 
@@ -61,7 +61,7 @@ const ExpenseList = ({ expenses, fetchData,category,setExpenseArr}:ExpenseProps)
   }
   return (
    <>
-   <ColorModeSwitch/>
+   {/* <ColorModeSwitch/> */}
   
    <table className="table tBody table-bordered">
   <thead>
@@ -86,7 +86,14 @@ const ExpenseList = ({ expenses, fetchData,category,setExpenseArr}:ExpenseProps)
   <tfoot>
     <tr>
         <td>Total</td>
-        <td>{expenses.reduce((acc,expenses) => expenses.amount + acc, 0).toFixed(2)}</td>
+        <td>{expenses.reduce((acc,expenses) => {
+
+         const amount = typeof expenses.amount == "number" ? expenses.amount : parseFloat(expenses.amount) || 0 ; 
+          return acc + amount;
+
+        }, 0 ).toFixed(2) 
+ 
+        } </td>
         <td></td>
         <td></td>
     </tr>

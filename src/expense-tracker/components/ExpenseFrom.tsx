@@ -1,143 +1,4 @@
 
-// import { useForm } from "react-hook-form";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { z } from "zod";
-// import categories from "../categories";
-// import axios from "axios";
-// import { useEffect, useState } from "react";
-// import { BASE_URL } from "../../constant";
-// // import { useState } from "react";
-
-
-
-// const schema = z.object({
-//   description: z.string().min(1, { message: "Description is required" }),
-//   amount: z.number().positive({ message: "Amount must be a positive number" }),
-//   category: z.string().min(1, { message: "Category is required" }),
-// });
-
-// type FormData = z.infer<typeof schema>;
-
-// interface ExpenseFormProps{
-//   addOnExpense:(data: FormData) => void;
-  
-// }
-
-//  const expenseForm = ({addOnExpense}: ExpenseFormProps) => {
-//   const {register, handleSubmit, formState:{errors}} = useForm<FormData>({resolver:zodResolver(schema)})
-//   const [expense, setExpense] = useState({
-//     id:0,
-//     amount:  "",
-//     description: "",
-//     category: ""
-
-
-//  }
-
-
-// const ExpenseForm = ({addOnExpense}:ExpenseFormProps) => {
-//   const [data, setData] = useState<ExpenseFormProps[]>([])
-//   const [currentData, setcurrentData] = useState<ExpenseFormProps>({} as ExpenseFormProps);
-//   const {
-//       register,
-//       handleSubmit,
-//       formState: { errors }
-//   } = useForm<FormData>({
-//       resolver: zodResolver(schema)
-//   });
-
-//     const [list, setList] = useState<FormData[]>([])
-
-//     // const onSubmit = (data: FormData) => {
-//     //   addOnExpense(data)
-      
-//     // };
-
-//     const fetchData = () => {
-//       axios.get(BASE_URL + "Expense")
-//       .then((response) => {
-//         setData(response.data);
-//       })
-//     }
-  
-//     useEffect(() => {
-//       fetchData();
-//     }, []); 
-
-//     const handleAdd = () => {
-    
-//       setcurrentData({} as ExpenseFormProps);
-//     };
-
-    
-//     return (
-//         <>
-//         {/* onSubmit={handleSubmit(addOnExpense)} */}
-//       <form >
-//         <div className="mb-3">
-//           <label htmlFor="description" className="form-label">
-//             Description
-//           </label>
-//           <input
-//             id="description"
-//             type="text"
-//             className="form-control"
-//             {...register("description")}
-//             onChange={(e) => setExpense({...expense, description: e.target.value  })}
-//             />
-//           {errors.description && (
-//               <p className="text-danger">{errors.description.message}</p>
-//             )}
-//         </div>
-//         <div className="mb-3">
-//           <label htmlFor="amount" className="form-label">
-//             Amount
-//           </label>
-//           <input
-//             id="amount"
-//             type="number"
-//             className="form-control"
-//             {...register("amount", { valueAsNumber: true })}
-//             onChange={(e)=> setExpense({...expense, amount: e.target.value })}
-//             />
-//           {errors.amount && (
-//               <p className="text-danger">{errors.amount.message}</p>
-//             )}
-//         </div>
-//         <div className="mb-3">
-//           <label htmlFor="category" className="form-label">
-//             Category
-//           </label>
-//           <select
-//             id="category"
-//             className="form-control"
-//             {...register("category")}
-//             >
-//             <option value=""></option>
-//             {categories.map((category) => (
-//                 <option key={category} value={category}>
-//                 {category}
-//               </option>
-//             ))}
-//           </select>
-//           {errors.category && (
-//               <p className="text-danger">{errors.category.message}</p>
-//             )}
-//         </div>
-//         <button  className="btn btn-outline-primary"  onClick={() => handleAdd()} type="submit">
-//           Submit
-//         </button>
-       
-//       </form>
-//     </>
-//   );
-// };
- 
- 
-
-// export default ExpenseForm;
- 
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -192,7 +53,7 @@ const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
     <>
       <form >
         <div className="mb-3">
-          <label htmlFor="description" className="form-label">
+          <label htmlFor="description" className="form-label textC glowing-object">
             Description
           </label>
           <input
@@ -208,7 +69,7 @@ const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
           )}
         </div>
         <div className="mb-3">
-          <label htmlFor="amount" className="form-label">
+          <label  htmlFor="amount" className="form-label textC glowing-object">
             Amount
           </label>
           <input
@@ -224,7 +85,7 @@ const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
           )}
         </div>
         <div className="mb-3">
-          <label htmlFor="category" className="form-label">
+          <label htmlFor="category" className="form-label textC glowing-object">
             Category
           </label>
           <select
@@ -232,6 +93,8 @@ const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
             value={expense.category}
             className="form-control"
             {...register("category")}
+            onChange={(e) => {setExpense({...expense, category: e.target.value }); console.log(e.target.value);
+            }}
           >
             <option value=""></option>
             {categories.map((category) => (
@@ -244,9 +107,10 @@ const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
             <p className="text-danger">{errors.category.message}</p>
           )}
         </div>
-        <button onClick={addExpense} className="btn btn-outline-primary" type="submit">
+        <button onClick={addExpense} className="btn btn-outline-primary" type="button">
           Submit
         </button>
+        
       </form>
     </>
   );

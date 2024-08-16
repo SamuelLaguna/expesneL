@@ -2,9 +2,10 @@ import { useEffect, useState } from "react"
 import ExpenseList from "./expense-tracker/components/ExpenseList"
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter"
 import ExpenseFrom from "./expense-tracker/components/ExpenseFrom";
-import ColorModeSwitch from "./expense-tracker/components/ColorModeSwitch";
+
 import axios from "axios";
 import { BASE_URL } from "./constant";
+
 
 // import Practice from "./expense-tracker/components/Practice";
 
@@ -69,8 +70,8 @@ const App = () => {
    <>
     {/* <ExpenseForm addOnExpense={() => handleAdd} currentData={currentData} fetchData={fetchData}/> */}
   
-   <ColorModeSwitch/>
-
+   
+    
    <h1 className="text-center">Expense Tracker</h1>
 
    <div className="m-5"> 
@@ -79,12 +80,11 @@ const App = () => {
    </div>
 
     <div className="mb-5">
-   <ExpenseFilter onSelectCategory={category => setSelectedCategory(category) }/>
+   <ExpenseFilter fetchData={fetchData} onSelectCategory={category => setSelectedCategory(category) }/>
 
     </div>
     <div className="mb-5">
-   <ExpenseList category={selectedCategory} fetchData={fetchData} expenses={data} setExpenseArr={setData}/>
-
+    <ExpenseList category={selectedCategory} fetchData={fetchData} expenses={data} setExpenseArr={setData}/>
     </div>
    </>
   )
