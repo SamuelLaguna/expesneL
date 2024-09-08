@@ -63,7 +63,7 @@ const ExpenseList = ({ expenses, fetchData,category,setExpenseArr}:ExpenseProps)
    <>
    {/* <ColorModeSwitch/> */}
   
-   <table className="table tBody table-bordered">
+   <table className="table tBody table-bordered glowing-object ">
   <thead>
     <tr>
       <th scope="col">Description</th>
