@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
-import ExpenseList from "./expense-tracker/components/ExpenseList"
-import ExpenseFilter from "./expense-tracker/components/ExpenseFilter"
-import ExpenseFrom from "./expense-tracker/components/ExpenseFrom";
-
+import  { useEffect, useState } from "react";
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import axios from "axios";
+import ExpenseList from "./expense-tracker/components/ExpenseList";
+import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
+import ExpenseForm from "./expense-tracker/components/ExpenseFrom";
 import { BASE_URL } from "./constant";
 
 
@@ -70,13 +70,26 @@ const App = () => {
    <>
     {/* <ExpenseForm addOnExpense={() => handleAdd} currentData={currentData} fetchData={fetchData}/> */}
   
+    <Navbar expand="lg" className="bg-body-tertiary">
+      <Container>
+        <Navbar.Brand href="#home">Expense App</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="#home">Create Account</Nav.Link>
+            <Nav.Link href="#link">Login</Nav.Link>
+           
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
    
     
    <h1 className="text-center">Expense Tracker</h1>
 
    <div className="m-5"> 
        {/* From InterFace ExpenseFrom  */}
-    <ExpenseFrom  fetchData={fetchData}/>
+    <ExpenseForm  fetchData={fetchData}/>
    </div>
 
     <div className="mb-5">
