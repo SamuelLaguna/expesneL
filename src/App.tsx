@@ -5,6 +5,8 @@ import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseFrom";
 import { BASE_URL } from "./constant";
+import { useNavigate } from "react-router-dom";
+import Login from "./expense-tracker/components/Login";
 
 
 // import Practice from "./expense-tracker/components/Practice";
@@ -44,28 +46,7 @@ const App = () => {
     fetchData();
   }, [])
 
-  //Create a useState to help us handle out selectedCategories
  
-
-  // const handleDelete = (id:number) => {
-  //   setDummyExpensesArray(dummyExpensesArray.filter(expense => expense.id !== id))
-  // }
-
-
-  
-  
-  // const [dummyExpensesArray, setDummyExpensesArray] = useState([
-  //   {id:1, description : '' , amount: 0, category: ''},
-  //   // {id:2, description : 'bbbbb' , amount: 15, category: 'Entertainment'},
-  //   // {id:3, description : 'ccccc' , amount: 20, category: 'Food'},
-  //   // {id:4, description : 'ddddd' , amount: 25, category: 'Shopping'},
-  //   // {id:5, escriptiond : 'eeeee' , amount: 16, category: 'Groceries'}
-    
-
-  // ])
-  
-  //Create a varable with a ternary operator, we are going to use out selectedCatagory as a boolean filter though our dummy expensise array. 
-  // const visibleExpense = selectedCategory ? dummyExpensesArray.filter(e => e.category === selectedCategory) : dummyExpensesArray
   return (
    <>
     {/* <ExpenseForm addOnExpense={() => handleAdd} currentData={currentData} fetchData={fetchData}/> */}
@@ -77,7 +58,7 @@ const App = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home">Create Account</Nav.Link>
-            <Nav.Link href="#link">Login</Nav.Link>
+            <Nav.Link  as={Link} to={Login} >Login</Nav.Link>
            
           </Nav>
         </Navbar.Collapse>

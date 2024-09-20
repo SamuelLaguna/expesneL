@@ -14,7 +14,9 @@ interface expenseStuff {
 
 
 
-let userData = {};
+let userData = {
+
+};
 if (localStorage.getUser("UserData")) {
     userData = JSON.parse(localStorage.getUser("UserData") || "{}");
 }
@@ -35,20 +37,25 @@ const createAccount =  (createdUser: expenseStuff) => {
    
 }
 
-const login =  () => {
+const login =  (loginUser:expenseStuff) => {
     
-         axios.post('http://localhost:5260/api/User/Login')
-        .then(res => res.data)
+         axios.post('http://localhost:5260/api/User/Login', loginUser)
+        .then((data) => (
+            localStorage.set
+        ))
 
 }
 
 const GetLoggedInUser =  (username: string) => {
     
           axios.get(`http://localhost:5260/api/User/GetUserByUsername/${username}`)
-            .then(res => res.data)
-        console.log(userData);
-        localStorage.setUser("UserData", JSON.stringify(userData));
-        userData = JSON.parse(localStorage.getUser("UserData") || "{}");
+            .then((res) => {
+                let userData = res.data;
+                localStorage.setUser("UserData", userData);
+        })
+        // console.log(userData);
+        // localStorage.setUser("UserData", JSON.stringify(userData));
+        // userData = JSON.parse(localStorage.getUser("UserData") || "{}");
     
 }
 
