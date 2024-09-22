@@ -2,13 +2,16 @@ import axios from 'axios';
 import { Controller } from 'react-hook-form';
 
 
-interface expenseStuff {
+export interface expenseStuff {
     id: number,
     category:string,
     price: string,
     description: string,
     createdUser: string,
-    userData: {}
+    username: string,
+    password: string,
+   token: string
+    // userData: {}
 }
 
 
@@ -17,13 +20,13 @@ interface expenseStuff {
 let userData = {
 
 };
-if (localStorage.getUser("UserData")) {
+if (localStorage.getItem("UserData")) {
     userData = JSON.parse(localStorage.getUser("UserData") || "{}");
 }
 
 const checkToken = ()  => {
     let result = false;
-    let isData = localStorage.getUser("Token");
+    let isData = localStorage.getItem("Token");
     if (isData && isData !== null) {
         result = true;
     }
@@ -37,12 +40,15 @@ const createAccount =  (createdUser: expenseStuff) => {
    
 }
 
-const login =  (loginUser:expenseStuff) => {
+const login =  (loginUser: expenseStuff) => {
     
          axios.post('http://localhost:5260/api/User/Login', loginUser)
-        .then((data) => (
-            localStorage.set
+        .then((response) => (
+            localStorage.setItem('Token', response.data.token),
+            console.log(response,'This is from login service funciton')
+            
         ))
+       
 
 }
 
@@ -51,17 +57,15 @@ const GetLoggedInUser =  (username: string) => {
           axios.get(`http://localhost:5260/api/User/GetUserByUsername/${username}`)
             .then((res) => {
                 let userData = res.data;
-                localStorage.setUser("UserData", userData);
+                localStorage.setItem("UserData", userData);
         })
-        // console.log(userData);
-        // localStorage.setUser("UserData", JSON.stringify(userData));
-        // userData = JSON.parse(localStorage.getUser("UserData") || "{}");
+        
     
 }
 
 const LoggedInData = () => {
-    if (!userData && localStorage.getUser("UserData")) {
-        userData = JSON.parse(localStorage.getUser("UserData") || "{}");
+    if (!userData && localStorage.getItem("UserData")) {
+        userData = JSON.parse(localStorage.getItem("UserData") || "{}");
     }
     return userData;
 }
@@ -93,5 +97,6 @@ export {
     GetLoggedInUser,
     LoggedInData,
     sendData,
+   
     
 };

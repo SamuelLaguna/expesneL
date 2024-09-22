@@ -5,13 +5,10 @@ import ExpenseList from "./expense-tracker/components/ExpenseList";
 import ExpenseFilter from "./expense-tracker/components/ExpenseFilter";
 import ExpenseForm from "./expense-tracker/components/ExpenseFrom";
 import { BASE_URL } from "./constant";
-import { useNavigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./expense-tracker/components/Login";
-
-
-// import Practice from "./expense-tracker/components/Practice";
-
-
+import {  Link } from 'react-router-dom';
+import CreateAccount from "./expense-tracker/components/CreateAccount";
 
 
 export interface Expense {
@@ -50,7 +47,8 @@ const App = () => {
   return (
    <>
     {/* <ExpenseForm addOnExpense={() => handleAdd} currentData={currentData} fetchData={fetchData}/> */}
-  
+      <BrowserRouter>
+      
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">Expense App</Navbar.Brand>
@@ -58,7 +56,7 @@ const App = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#home">Create Account</Nav.Link>
-            <Nav.Link  as={Link} to={Login} >Login</Nav.Link>
+            <Nav.Link  as={Link} to={"/Login"} >Login</Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
@@ -80,6 +78,13 @@ const App = () => {
     <div className="mb-5">
     <ExpenseList category={selectedCategory} fetchData={fetchData} expenses={data} setExpenseArr={setData}/>
     </div>
+    <CreateAccount/>
+    {/* <Login/> */}
+
+    <Routes>
+      <Route path="/Login" element={<Login/>}/>
+    </Routes>
+    </BrowserRouter>
    </>
   )
 }

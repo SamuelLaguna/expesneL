@@ -2,50 +2,48 @@
 import { useState } from 'react';
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
-import { GetLoggedInUser, login } from '../../Services/DataService';
+import { expenseStuff, GetLoggedInUser, login } from '../../Services/DataService';
 import axios from 'axios';
 import { BASE_URL } from '../../constant';
+import ExpenseForm from './ExpenseFrom';
 
-interface UserData {
-  username: string,
-  password: string
-}
 
-interface LoginResponse {
-  token: string;
-}
+
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleUser = (e: string) => {
-    setUsername(e);
+  const handleUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
   };
 
-  const handlePassword = (e:string ) => {
-    setPassword(e);
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
   };
 
-  const handleSubmit = (e:string) => {
-    // e.preventDefault();
-    const userData: UserData = {
+  const handleSubmit =  () => {
+
+    let userData : any = {
       username: username,
       password: password
-    };
-    console.log(userData);
-  };
-
-    const handleLogin = (loginUser: string) => {
-      axios.post(BASE_URL + "/User/Login", loginUser)
-      .then((res) => {
-        let data = res.data;
-        localStorage.setItem("Token", data.token)
-      })
+      
     }
-    
-    
+    //This is calling from the service login funciton
+    // login(userData);
+    let token =  login(userData)
+    console.log(userData);
+    if(token != null)
+    {
+      localStorage.setItem("Token", token);
+      GetLoggedInUser(username);
+      navigate('/ExpenseForm')
+
+    }
+
+  }
+
   
 
   return (
@@ -56,13 +54,13 @@ const Login = () => {
             <p className="text-center">Login</p>
             <Form.Group className="mb-3" controlId="Username">
               <Form.Label>Username</Form.Label>
-              <Form.Control type="text" placeholder="Enter Username" onChange={(e) => handleUser(e.target.value)} />
+              <Form.Control type="text" placeholder="Enter Username" onChange={ handleUser} />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" onChange={(e) => handlePassword(e.target.value)} />
+              <Form.Control type="password" placeholder="Password" onChange={ handlePassword} />
             </Form.Group>
-            <Button variant="primary" onClick={() => handleSubmit}>
+            <Button variant="primary" onClick={handleSubmit}>
               Login
             </Button>
             <p className="mt-3">Don't Have an Account?</p>
