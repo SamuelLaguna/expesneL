@@ -6,7 +6,8 @@ import categories from "../categories";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../constant";
-import { Expense } from "../../App";
+import { GetLoggedInUserData } from "../../Services/DataService";
+// import { Expense } from "../../App";
 
 const schema = z.object({
   description: z.string().min(1, { message: "Description is required" }),
@@ -20,13 +21,25 @@ interface ExpenseFormProps {
 currentData?: Expense 
   fetchData : () => void
 }
+interface Expense {
+  id: number;
+  description: string;
+  amount: number;
+  category: string;
+  isPublished: boolean;
+  isDeleted: boolean;
+}
 
-const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
+
+const ExpenseForm = ({ fetchData, currentData, }: ExpenseFormProps) => {
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema)
   });
 
 
+  const [UserData, setUserData] = useState<any>(null)
+  const [userId, setUserId] = useState(0);
+  const [expenseItems, setExpenseItems] = useState<Expense[]>([]);
 
   // const [data, setData] = useState<ExpenseFormProps[]>([]);
   // const [currentData, setCurrentData] = useState<ExpenseFormProps>({} as ExpenseFormProps);
@@ -47,6 +60,15 @@ const ExpenseForm = ({ fetchData, currentData }: ExpenseFormProps) => {
       console.log(errors);
       
     })
+  }
+
+
+  const loadUserData = async () => {
+
+    let userInfo = GetLoggedInUserData();
+    setUserId(userInfo);
+    
+
   }
 
   return (
