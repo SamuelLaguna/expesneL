@@ -11,18 +11,15 @@ export interface expenseStuff {
     createdUser: string,
     username: string,
     password: string,
-   token: string
-    // userData: {}
+
 }
 
 
 
 
-let userData = {
-
-};
+let userData = {};
 if (localStorage.getItem("UserData")) {
-    userData = JSON.parse(localStorage.getUser("UserData") || "{}");
+    userData = JSON.parse(localStorage.getItem("UserData")!);
 }
 
 const checkToken = ()  => {
@@ -41,6 +38,8 @@ const createAccount =  (createdUser: expenseStuff) => {
    
 }
 
+
+
 const login = async (loginUser: expenseStuff) => {
     
         let userToken = "";
@@ -52,6 +51,8 @@ const login = async (loginUser: expenseStuff) => {
             console.log(localStorage);
             console.log(data);
             console.log(loginUser);
+            
+            
 
             
         } catch (error){
@@ -126,10 +127,10 @@ const sendData = (controller: string, endpoint: string,) => {
         return response.data;
       } catch (error: any) {
         if (axios.isAxiosError(error)) {
-          // Axios-specific error handling
+          
           throw new Error(`Error in getItemsByUserId: ${error.response?.data?.message || error.message}`);
         } else {
-          // Non-Axios error handling (generic error)
+         
           throw new Error(`Error in getItemsByUserId: ${error.message}`);
         }
       }

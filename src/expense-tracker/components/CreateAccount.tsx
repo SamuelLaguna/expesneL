@@ -29,10 +29,7 @@ const CreateAccount = () => {
       
           username: Username,
           password: Password
-          // category: '',
-          // price: '',
-          // description: '',
-          // createdUser: '',
+        
 
       }
       createAccount(userData);

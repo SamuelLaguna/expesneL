@@ -66,7 +66,7 @@ const ExpenseForm = ({ fetchData, currentData, }: ExpenseFormProps) => {
   const loadUserData = async () => {
 
     let userInfo = GetLoggedInUserData();
-    setUserId(userInfo);
+    // setUserId(userInfo);
     
 
   }

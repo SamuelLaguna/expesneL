@@ -49,12 +49,13 @@ const App = () => {
     {/* <ExpenseForm addOnExpense={() => handleAdd} currentData={currentData} fetchData={fetchData}/> */}
       <BrowserRouter>
       
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" >
       <Container>
         <Navbar.Brand href="#home">Expense App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+          {/* <Nav.Link>Welcome {user ? user.publisherName : "Guest"}</Nav.Link> */}
             <Nav.Link href="#home">Create Account</Nav.Link>
             <Nav.Link  as={Link} to={"/Login"} >Login</Nav.Link>
            
@@ -82,7 +83,9 @@ const App = () => {
     {/* <Login/> */}
 
     <Routes>
+      {/* <Route path="/" element={<ExpenseForm/>}/> */}
       <Route path="/Login" element={<Login/>}/>
+      {/* <Route path="/CreateAccount" element={<CreateAccount/>}/> */}
     </Routes>
     </BrowserRouter>
    </>

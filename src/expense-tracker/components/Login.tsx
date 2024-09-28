@@ -23,27 +23,28 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit =  () => {
 
-    let userData : any = {
-      username: username,
-      password: password
+  const handleSubmit = async () => {
+    try {
+      let userData: any = {
+        username: username,
+        password: password,
+      };
+  
+      const token = await login(userData);
+      console.log('From handleSubmit', token);
       
+      if (token != null) {
+        // localStorage.setItem("Token", token.token);
+        await GetLoggedInUser(username);
+        navigate('/ExpenseFrom');
+      } else {
+        console.error("Error retrieving token");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
     }
-    //This is calling from the service login funciton
-    // login(userData);
-    let token =  login(userData)
-    console.log(userData);
-    if(token != null)
-    {
-      localStorage.setItem("Token", token);
-      GetLoggedInUser(username);
-      navigate('/ExpenseForm')
-
-    }
-
-  }
-
+  };
   
 
   return (
@@ -75,3 +76,5 @@ const Login = () => {
 };
 
 export default Login;
+
+
